@@ -28,7 +28,7 @@
         android:orientation="horizontal">
 
         <com.allure.lbanners.LMBanners
-            android:id="@+id/CarouselView"
+            android:id="@+id/banners"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:canLoop="true"

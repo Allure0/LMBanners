@@ -60,9 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, strs));
 
 
-        mLBanners = (LMBanners) findViewById(R.id.CarouselView);
+        mLBanners = (LMBanners) findViewById(R.id.banners);
         mLBanners.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(this, 200)));
-
         //本地用法
 //        mLBanners.setAdapter(new LocalImgAdapter(MainActivity.this),localImages);
         //网络图片
