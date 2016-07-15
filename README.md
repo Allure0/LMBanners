@@ -134,8 +134,8 @@ Config in Java:
 
 ### 注意事项
 纵向播放时暂只支持一种效果（后续可能增加）
+使用纵向播放后代码不要设置setHoriZontalTransitionEffect（）、setHoriZontalCustomTransformer（）
 XML内不要调用自定义属性horizontal_transitionEffect
-调用纵向播放后代码不要设置setHoriZontalTransitionEffect（）setHoriZontalCustomTransformer（）
 
 
 ###TODO
