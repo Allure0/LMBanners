@@ -11,7 +11,7 @@
 个人自觉做了一段时间也应开源项目作出一丝贡献,力求帮助更多的童鞋更好更快的完成项目开发~~~~此刻，来波关注啊,兄弟,你们的支持是我最大的动力。
 
 ####示例:  
-![](https://github.com/Allure0/LMBanners/blob/master/app/LMBanners.gif)
+![image](https://github.com/Allure0/LMBanners/blob/master/app/LMBanners.gif)
 
 ###特性（可选）
 - 支持是否循环播放
