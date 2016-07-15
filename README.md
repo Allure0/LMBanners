@@ -4,10 +4,10 @@
 -------------
 
 > 关于我，欢迎关注  
-   微信：[asddavid]()   QQ群:[482906631]()
+      QQ群:[482906631]()
 
 
-移动开发者日渐饱和,各种开源项目层出不穷,最近在朋友[bingoogolapple](https://github.com/bingoogolapple)群里看依然有童鞋需求Banners的库。
+最近在朋友[bingoogolapple](https://github.com/bingoogolapple)群里看依然有童鞋需求Banners的库。
 个人自觉做了一段时间也应开源项目作出一丝贡献,力求帮助更多的童鞋更好更快的完成项目开发~~~~此刻，来波关注啊,兄弟,你们的支持是我最大的动力。
 
 ####示例:  
