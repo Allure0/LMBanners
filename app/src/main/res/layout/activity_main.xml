@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.yangqiangyu.test.carouselview.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.allure.lbanners.LMBanners
+            android:id="@+id/CarouselView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:canLoop="true"
+            app:isVertical="false"
+            app:auto_play="true"
+            app:durtion="5000"
+            app:scroll_duration="66666"
+            app:indicator_select="@drawable/page_indicator_select"
+            app:indicator_unselect="@drawable/page_indicator_unselect"
+            app:horizontal_transitionEffect="accordion"
+            app:indicator_position="bottom_mid"
+            >
+
+        </com.allure.lbanners.LMBanners>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+</LinearLayout>

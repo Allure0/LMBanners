@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LMBanners">
+        <attr name = "canLoop" format = "boolean" />
+        <attr name="durtion" format="integer"></attr>
+        <attr name="scroll_duration" format="integer"></attr>
+        <attr name="indicator_select" format="reference"></attr>
+        <attr name="indicator_unselect" format="reference"></attr>
+        <attr name="indicator_position" />
+        <!-- 是否可以自动播放-->
+        <attr name="auto_play" format="boolean" />
+
+        <attr name="horizontal_transitionEffect"  />
+        <!-- 是否纵向滑动-->
+        <attr name="isVertical" format="boolean" />
+    </declare-styleable>
+    <attr name="horizontal_transitionEffect" format="enum">
+        <enum name="defaultEffect" value="0" />
+        <enum name="alpha" value="1" />
+        <enum name="rotate" value="2" />
+        <enum name="cube" value="3" />
+        <enum name="flip" value="4" />
+        <enum name="accordion" value="5" />
+        <enum name="zoomFade" value="6" />
+        <enum name="fade" value="7" />
+        <enum name="zoomCenter" value="8" />
+        <enum name="zoomStack" value="9" />
+        <enum name="stack" value="10" />
+        <enum name="depth" value="11" />
+        <enum name="zoom" value="12" />
+        <enum name="zoomOut" value="13" />
+
+
+    </attr>
+    <!-- 指示器位置-->
+    <attr name="indicator_position">
+        <enum name="bottom_mid" value="0" />
+        <enum name="bottom_right" value="1" />
+    </attr>
+
+</resources>

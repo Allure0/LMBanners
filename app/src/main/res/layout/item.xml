@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#b0b0b0">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:id="@+id/id_image" />
+    <TextView
+        android:visibility="gone"
+        android:textColor="@color/colorAccent"
+        android:text="支持是否循环播放，支持是否自动播放，支持横纵向播放，支持设置自动播放时间设置，支持两页过渡时间设置。支持指示器的选中和未选中自定义ICon.,支持原点是否显示,可选中切换动画效果，亦可自定义切换效果(温馨提示，纵向播放动画效果暂只支持一种效果。。。)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
