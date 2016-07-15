@@ -7,8 +7,8 @@ import android.widget.ImageView;
 
 import com.allure.lbanners.LMBanners;
 import com.allure.lbanners.adapter.LBaseAdapter;
+import com.allure.lmbanners.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.yangqiangyu.test.carouselview.R;
 
 /**
  * Created by luomin on 16/7/12.

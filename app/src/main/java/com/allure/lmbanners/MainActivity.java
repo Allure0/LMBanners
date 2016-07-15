@@ -14,12 +14,12 @@ import android.widget.ListView;
 import com.allure.lbanners.LMBanners;
 import com.allure.lbanners.transformer.TransitionEffect;
 import com.allure.lbanners.utils.ScreenUtils;
+import com.allure.lmbanners.adapter.UrlImgAdapter;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.yangqiangyu.test.carouselview.adapter.UrlImgAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
