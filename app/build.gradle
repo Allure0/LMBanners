@@ -30,7 +30,7 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
     //    以下是引用方式
-    compile project(':lm_banner_library')
-//    compile 'com.allure0:LMBanners:1.0.2'
+//    compile project(':lm_banner_library')
+    compile 'com.allure0:LMBanners:1.0.2'
 
 }

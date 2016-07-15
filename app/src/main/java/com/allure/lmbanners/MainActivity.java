@@ -14,7 +14,7 @@ import android.widget.ListView;
 import com.allure.lbanners.LMBanners;
 import com.allure.lbanners.transformer.TransitionEffect;
 import com.allure.lbanners.utils.ScreenUtils;
-import com.allure.lmbanners.adapter.UrlImgAdapter;
+import com.allure.lmbanners.adapter.LocalImgAdapter;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private LayoutInflater mInflater;
+    private LMBanners mLBanners;
     //本地图片
     private ArrayList<Integer> localImages = new ArrayList<Integer>();
     //网络图片
@@ -36,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
             R.mipmap.img4,
             R.mipmap.img5
     };
-    private LayoutInflater mInflater;
-    private LMBanners mLBanners;
 
     private static final String[] strs = new String[]{
             "defaultEffect", "alpha", "rotate", "cube", "flip", "accordion", "zoomFade",
@@ -49,9 +49,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initImageLoader();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         mInflater = this.getLayoutInflater();
+
         addLocalImg();
         addUrilImg();
 
@@ -59,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, strs));
 
-
         mLBanners = (LMBanners) findViewById(R.id.banners);
+        //设置Banners高度
         mLBanners.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(this, 200)));
         //本地用法
-//        mLBanners.setAdapter(new LocalImgAdapter(MainActivity.this),localImages);
+        mLBanners.setAdapter(new LocalImgAdapter(MainActivity.this),localImages);
         //网络图片
-        mLBanners.setAdapter(new UrlImgAdapter(MainActivity.this), networkImages);
+//        mLBanners.setAdapter(new UrlImgAdapter(MainActivity.this), networkImages);
         //参数设置
         mLBanners.setAutoPlay(true);//自动播放
         mLBanners.setVertical(false);//是否可以垂直
