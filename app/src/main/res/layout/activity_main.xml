@@ -20,7 +20,7 @@
             app:isVertical="false"
             app:auto_play="true"
             app:durtion="5000"
-            app:scroll_duration="66666"
+            app:scroll_duration="1000"
             app:indicator_select="@drawable/page_indicator_select"
             app:indicator_unselect="@drawable/page_indicator_unselect"
             app:horizontal_transitionEffect="accordion"
