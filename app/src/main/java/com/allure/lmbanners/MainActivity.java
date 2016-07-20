@@ -3,7 +3,6 @@ package com.allure.lmbanners;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         mLBanners.setCanLoop(true);//循环播放
         mLBanners.setSelectIndicatorRes(R.drawable.page_indicator_select);//选中的原点
         mLBanners.setUnSelectUnIndicatorRes(R.drawable.page_indicator_unselect);//未选中的原点
+        mLBanners.setIndicatorWidth(5);//默认为5dp
 //        mLBanners.setHoriZontalTransitionEffect(TransitionEffect.Default);//选中喜欢的样式
         mLBanners.setHoriZontalCustomTransformer(new ParallaxTransformer(R.id.id_image));//自定义样式
         mLBanners.setDurtion(2000);//切换时间
