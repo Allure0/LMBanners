@@ -13,6 +13,9 @@
         <attr name="horizontal_transitionEffect"  />
         <!-- 是否纵向滑动-->
         <attr name="isVertical" format="boolean" />
+        <!--指示器原点大小-->
+        <attr name="indicator_width" format="integer" />
+
     </declare-styleable>
     <attr name="horizontal_transitionEffect" format="enum">
         <enum name="defaultEffect" value="0" />

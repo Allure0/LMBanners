@@ -61,6 +61,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
     private int mScrollDuration = 0;//两页之间切换所需要的时间
     private int mSlectIndicatorRes = R.drawable.page_indicator_select;//选中指示器
     private int mUnSlectIndicatorRes = R.drawable.page_indicator_unselect;//未选中指示器
+    private int mIndicatorWidth=5;//默认指示器大小
     private int mTextColor = Color.WHITE;//文字颜色
     private int mTipTextSize;//文字大小
 
@@ -90,6 +91,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
         autoPlay = typedArray.getBoolean(R.styleable.LMBanners_auto_play, true);//默认可以自动播放
         mSlectIndicatorRes = typedArray.getResourceId(R.styleable.LMBanners_indicator_select, R.drawable.page_indicator_select);
         mUnSlectIndicatorRes = typedArray.getResourceId(R.styleable.LMBanners_indicator_unselect, R.drawable.page_indicator_unselect);
+        mIndicatorWidth=typedArray.getInteger(R.styleable.LMBanners_indicator_width,5);//指示器大小
         pageTransFormerIndex = typedArray.getInt(R.styleable.LMBanners_horizontal_transitionEffect, TransitionEffect.Default.ordinal());
         mTransitionEffect = TransitionEffect.values()[pageTransFormerIndex];
         isVertical = typedArray.getBoolean(R.styleable.LMBanners_isVertical, false);
@@ -109,7 +111,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
         this.mLayout = (RelativeLayout) view.findViewById(R.id.layout);
         this.viewPager = (HorizonVerticalViewPager) view.findViewById(R.id.gallery);
         this.indicatorLayout = (LinearLayout) view.findViewById(R.id.CarouselLayoutPage);
-        pageItemWidth = ScreenUtils.dip2px(context, 5);
+        pageItemWidth = ScreenUtils.dip2px(context, mIndicatorWidth);
         this.viewPager.addOnPageChangeListener(this);
         //如果是纵向滑动重新进行初始化
         checkIsVertical(isVertical);
@@ -202,7 +204,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        Log.d("CarouselView", "onPageScrolled was invoke()");
+        Log.d("LMBanners", "onPageScrolled was invoke()");
 
     }
 
@@ -232,7 +234,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
 
     @Override
     public void onPageScrollStateChanged(int state) {
-        Log.d("CarouselView", "onPageScrollStateChanged was invoke()");
+        Log.d("LMBanners", "onPageScrollStateChanged was invoke()");
 
     }
 
@@ -362,6 +364,17 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
         this.mUnSlectIndicatorRes = res;
     }
 
+
+    /**
+     * 设置指示器大小
+     * @param width
+     */
+    public  void setIndicatorWidth(int width){
+        this.mIndicatorWidth=width;
+        pageItemWidth = ScreenUtils.dip2px(context, mIndicatorWidth);
+
+
+    }
     /**
      * 隐藏原点
      */
@@ -402,7 +415,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
     }
 
     /**
-     * 退出时清楚所有消息
+     * 退出时清除所有消息
      */
     public void clearImageTimerTask() {
         mHandler.removeCallbacksAndMessages(null);
