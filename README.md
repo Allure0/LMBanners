@@ -19,6 +19,7 @@
 - 支持页面切换间隔时间
 - 支持两页动画过渡时间
 - 支持自定义原点的样式
+- 支持自定义原点大小
 - 支持多种动画过渡方式
 - 支持自定义动画过渡方式
 - 支持原点位置底部居中或者底部居右
@@ -48,7 +49,7 @@ ViewPager即可向左滑动.但是当向右的时候呢?原理一样,当下标�
 Gradle:  
 ``` xml
 dependencies {
-  compile 'com.allure0:LMBanners:1.0.2'
+  compile 'com.allure0:LMBanners:1.0.3'
 }
 ```
 
