@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-
 android {
     lintOptions {
         abortOnError false
@@ -10,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 102
-        versionName "1.0.2"
+        versionCode 104
+        versionName "1.0.4"
     }
     buildTypes {
         release {
