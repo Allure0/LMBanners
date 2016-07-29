@@ -19,7 +19,7 @@
 - 支持页面切换间隔时间
 - 支持两页动画过渡时间
 - 支持自定义原点的样式
-- 支持自定义原点大小
+- 支持自定义原点大小（设置的宽度即为高度）
 - 支持多种动画过渡方式
 - 支持自定义动画过渡方式
 - 支持原点位置底部居中或者底部居右
@@ -69,6 +69,7 @@ Config in xml:
             app:indicator_unselect="@drawable/page_indicator_unselect"
             app:horizontal_transitionEffect="accordion"
             app:indicator_position="bottom_mid"
+             app:indicator_width="5"
             >
         </com.allure.lbanners.LMBanners>
 ```
@@ -88,6 +89,7 @@ Config in Java:
         mLBanners.setCanLoop(true);//循环播放
         mLBanners.setSelectIndicatorRes(R.drawable.page_indicator_select);//选中的原点
         mLBanners.setUnSelectUnIndicatorRes(R.drawable.page_indicator_unselect);//未选中的原点
+        mLBanners.setIndicatorWidth(5);//默认为5dp
 //        mLBanners.setHoriZontalTransitionEffect(TransitionEffect.Default);//选中喜欢的样式
         mLBanners.setHoriZontalCustomTransformer(new ParallaxTransformer(R.id.id_image));//自定义样式
         mLBanners.setDurtion(2000);//切换时间
