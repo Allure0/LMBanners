@@ -13,7 +13,7 @@
 ![image](https://github.com/Allure0/LMBanners/blob/master/app/LMBanners.gif)
 
 ####引导页示例：
-
+![image](https://github.com/Allure0/LMBanners/blob/master/app/guide.jpeg)
 ###特性（可选）
 - 支持设置为Guide模式或者Banners模式
 - 支持是否循环播放
@@ -50,7 +50,7 @@ ViewPager即可向左滑动.但是当向右的时候呢?原理一样,当下标�
 Gradle:  
 ``` xml
 dependencies {
-  compile 'com.allure0:LMBanners:1.0.4'
+  compile 'com.allure0:LMBanners:1.0.6'
 }
 ```
 
@@ -84,12 +84,15 @@ Config in Java:
         //网络图片
         mLBanners.setAdapter(new UrlImgAdapter(MainActivity.this), networkImages);
         //参数设置
+        mLBanners.isGuide(true);//是否为引导页
         mLBanners.setAutoPlay(true);//自动播放
         mLBanners.setVertical(false);//是否可以垂直
         mLBanners.setScrollDurtion(222);//两页切换时间
         mLBanners.setCanLoop(true);//循环播放
         mLBanners.setSelectIndicatorRes(R.drawable.page_indicator_select);//选中的原点
         mLBanners.setUnSelectUnIndicatorRes(R.drawable.page_indicator_unselect);//未选中的原点
+         //若自定义原点到底部的距离,默认20,必须在setIndicatorWidth之前调用
+        mLBanners.setIndicatorBottomPadding(30);
         mLBanners.setIndicatorWidth(5);//默认为5dp
 //        mLBanners.setHoriZontalTransitionEffect(TransitionEffect.Default);//选中喜欢的样式
         mLBanners.setHoriZontalCustomTransformer(new ParallaxTransformer(R.id.id_image));//自定义样式
@@ -137,12 +140,12 @@ Config in Java:
 
 
 ### 注意事项
-纵向播放时暂只支持一种效果（后续可能增加）
-使用纵向播放后代码不要设置setHoriZontalTransitionEffect（）、setHoriZontalCustomTransformer（）
-XML内不要调用自定义属性horizontal_transitionEffect
-
-
+-  纵向播放时暂只支持一种效果（后续可能增加）
+-  使用纵向播放后代码不要设置setHoriZontalTransitionEffect（）、setHoriZontalCustomTransformer（）, XML内不要调用自定义属性horizontal_transitionEffect
+ XML内不要调用自定义属性horizontal_transitionEffect
+-  若setIndicatorBottomPadding（）动态代码自定义了原点距离底部的距离，需要在setIndicatorWidth()之前调用
 ###TODO
+ XML内不要调用自定义属性horizontal_transitionEffect
 若有BUG或者疑问,请提交Issues。者QQ群:[482906631]()
 
 ## License
