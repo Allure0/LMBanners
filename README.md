@@ -15,7 +15,7 @@
 ####引导页示例：
 ![image](https://github.com/Allure0/LMBanners/blob/master/app/guide.jpeg)
 ###特性（可选）
-- 支持设置为Guide模式或者Banners模式
+- 支持设置为Guide模式或者Banners模式（Guide模式记得将宽高比例设置为全屏）
 - 支持是否循环播放
 - 支持是否自动播放
 - 支持页面切换间隔时间
