@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -54,17 +55,34 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
     private IndicaTorPosition mIndicaTorLocation;
     private int indicatoreIndex = 0;
 
+    private boolean isGuide = false;//是否为引导页面
     private boolean canLoop = true;//是否支持循环播放
     private boolean autoPlay = true;//是否支持自动播放
     private boolean isVertical = false;//是否支持纵向滚动
+    private int indicatorBottomPadding = 20;//默认20的间距
     private int durtion = 0;//自动播放间隔时间，默认3S一次
     private int mScrollDuration = 0;//两页之间切换所需要的时间
     private int mSlectIndicatorRes = R.drawable.page_indicator_select;//选中指示器
     private int mUnSlectIndicatorRes = R.drawable.page_indicator_unselect;//未选中指示器
-    private int mIndicatorWidth=5;//默认指示器大小
+    private int mIndicatorWidth = 5;//默认指示器大小
+    public static  final int GUIDE_DEFAULT_PADDING = 50;
+    public  static  final int BANNER_DEFAULT_PADDING = 20;
+
+
     private int mTextColor = Color.WHITE;//文字颜色
     private int mTipTextSize;//文字大小
 
+
+    private Button btnStart;//开启按钮
+    private onStartListener onStartListener;
+
+    public LMBanners.onStartListener getOnStartListener() {
+        return onStartListener;
+    }
+
+    public void setOnStartListener(LMBanners.onStartListener onStartListener) {
+        this.onStartListener = onStartListener;
+    }
 
     public LMBanners(Context context) {
         super(context);
@@ -87,17 +105,18 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LMBanners, defStyleAttr, 0);
         canLoop = typedArray.getBoolean(R.styleable.LMBanners_canLoop, true);
         durtion = typedArray.getInteger(R.styleable.LMBanners_durtion, 3000);
+        isGuide = typedArray.getBoolean(R.styleable.LMBanners_isGuide, false);
         mScrollDuration = typedArray.getInteger(R.styleable.LMBanners_scroll_duration, 0);//为0时为默认滚动速度
         autoPlay = typedArray.getBoolean(R.styleable.LMBanners_auto_play, true);//默认可以自动播放
         mSlectIndicatorRes = typedArray.getResourceId(R.styleable.LMBanners_indicator_select, R.drawable.page_indicator_select);
         mUnSlectIndicatorRes = typedArray.getResourceId(R.styleable.LMBanners_indicator_unselect, R.drawable.page_indicator_unselect);
-        mIndicatorWidth=typedArray.getInteger(R.styleable.LMBanners_indicator_width,5);//指示器大小
+        indicatorBottomPadding = typedArray.getInt(R.styleable.LMBanners_indicatorBottomPadding, 20);
+        mIndicatorWidth = typedArray.getInteger(R.styleable.LMBanners_indicator_width, 5);//指示器大小
         pageTransFormerIndex = typedArray.getInt(R.styleable.LMBanners_horizontal_transitionEffect, TransitionEffect.Default.ordinal());
         mTransitionEffect = TransitionEffect.values()[pageTransFormerIndex];
         isVertical = typedArray.getBoolean(R.styleable.LMBanners_isVertical, false);
         indicatoreIndex = typedArray.getInt(R.styleable.LMBanners_indicator_position, IndicaTorPosition.BOTTOM_MID.ordinal());
         mIndicaTorLocation = IndicaTorPosition.values()[indicatoreIndex];
-        Log.e("Test", String.valueOf(isVertical));
         typedArray.recycle();
     }
 
@@ -110,12 +129,15 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
         View view = LayoutInflater.from(context).inflate(R.layout.banner_layout, null);
         this.mLayout = (RelativeLayout) view.findViewById(R.id.layout);
         this.viewPager = (HorizonVerticalViewPager) view.findViewById(R.id.gallery);
-        this.indicatorLayout = (LinearLayout) view.findViewById(R.id.CarouselLayoutPage);
+        this.indicatorLayout = (LinearLayout) view.findViewById(R.id.indicatorLayout);
+        this.btnStart = (Button) view.findViewById(R.id.btn_start);
         pageItemWidth = ScreenUtils.dip2px(context, mIndicatorWidth);
         this.viewPager.addOnPageChangeListener(this);
+        setGuide();
+        setIndicatorBottomPadding();
         //如果是纵向滑动重新进行初始化
         checkIsVertical(isVertical);
-       //设置指示器的位置
+        //设置指示器的位置
         setIndicatorPosition(mIndicaTorLocation);
         this.viewPager.setOnViewPagerTouchEventListener(new MyViewPager.OnViewPagerTouchEvent() {
             @Override
@@ -125,11 +147,32 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
 
             @Override
             public void onTouchUp() {
-           startImageTimerTask();
+                startImageTimerTask();
             }
         });
         addView(view);
 
+        btnStart.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onStartListener.startOpen();
+            }
+
+        });
+    }
+
+    /**
+     * 设置引导页显示并且如果未设置indicatorBottomPadding:引导页默认距离底部为50dp,banners默认为20dp
+     */
+    private void setGuide() {
+        if (isGuide) {
+            indicatorBottomPadding = GUIDE_DEFAULT_PADDING;
+            btnStart.setVisibility(View.VISIBLE);
+        } else {
+            indicatorBottomPadding = BANNER_DEFAULT_PADDING;
+            btnStart.setVisibility(View.GONE);
+        }
+        setIndicatorBottomPadding();
     }
 
     private void init() {
@@ -192,7 +235,6 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
     }
 
 
-
     public void setAdapter(LBaseAdapter adapter, List<T> list) {
         this.adapter = adapter;
         if (adapter != null) {
@@ -246,13 +288,11 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
     private void checkIsVertical(boolean b) {
         this.isVertical = b;
         if (isVertical) {
-            Log.e("Test2", String.valueOf(isVertical));
             viewPager.setIsVertical(isVertical);
             viewPager.removeAllViews();
             viewPager.init();
         } else {
             viewPager.setPageTransformer(true, LMPageTransformer.getPageTransformer(mTransitionEffect));
-
         }
     }
 
@@ -272,7 +312,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
      * 设置指示器的位置
      */
 
-    public  void  setIndicatorPosition(IndicaTorPosition mIndicaTorLocation){
+    public void setIndicatorPosition(IndicaTorPosition mIndicaTorLocation) {
         if (mIndicaTorLocation == IndicaTorPosition.BOTTOM_MID) {
             indicatorLayout.setGravity(Gravity.CENTER);
         } else {
@@ -281,6 +321,22 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
 
 
     }
+
+    /**
+     * Guide模式距离底部50，Banner模式距离底部20
+     * 设置原点距离底部的距离
+     * @param padding
+     */
+    public void setIndicatorBottomPadding(int padding) {
+        this.indicatorBottomPadding = padding;
+        setIndicatorBottomPadding();
+    }
+
+
+    private void setIndicatorBottomPadding() {
+        indicatorLayout.setPadding(0, 0, 0, pageItemWidth = ScreenUtils.dip2px(context, indicatorBottomPadding));
+    }
+
     /**
      * 设置自定义的切换动画
      *
@@ -313,6 +369,16 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
             mScroller.setScrollDuration(mScrollDuration);
             mScroller.initViewPagerScroll(viewPager);//这个是设置切换过渡时间为2秒
         }
+    }
+
+    /**
+     * 设置是否为引导页
+     *
+     * @param isGuide
+     */
+    public void isGuide(boolean isGuide) {
+        this.isGuide = isGuide;
+        setGuide();
     }
 
     /**
@@ -367,14 +433,14 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
 
     /**
      * 设置指示器大小
+     *
      * @param width
      */
-    public  void setIndicatorWidth(int width){
-        this.mIndicatorWidth=width;
+    public void setIndicatorWidth(int width) {
+        this.mIndicatorWidth = width;
         pageItemWidth = ScreenUtils.dip2px(context, mIndicatorWidth);
-
-
     }
+
     /**
      * 隐藏原点
      */
@@ -513,5 +579,10 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
     public enum IndicaTorPosition {
         BOTTOM_MID,
         BOTTOM_RIGHT
+    }
+
+
+    public interface onStartListener {
+        void startOpen();
     }
 }

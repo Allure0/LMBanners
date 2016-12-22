@@ -6,6 +6,11 @@
         <attr name="scroll_duration" format="integer"></attr>
         <attr name="indicator_select" format="reference"></attr>
         <attr name="indicator_unselect" format="reference"></attr>
+        <!--是否为引导页-->
+        <attr name="isGuide" format="boolean"></attr>
+
+        <attr name="indicatorBottomPadding" format="integer"></attr>
+
         <attr name="indicator_position" />
         <!-- 是否可以自动播放-->
         <attr name="auto_play" format="boolean" />

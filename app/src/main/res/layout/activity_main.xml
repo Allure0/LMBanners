@@ -13,6 +13,7 @@
 
 
         <com.allure.lbanners.LMBanners
+            android:background="@android:color/transparent"
             android:id="@+id/banners"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,11 +27,14 @@
             app:horizontal_transitionEffect="accordion"
             app:indicator_position="bottom_mid"
             app:indicator_width="5"
+            app:indicatorBottomPadding="20"
+
             >
 
         </com.allure.lbanners.LMBanners>
 
     <ListView
+        android:visibility="gone"
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

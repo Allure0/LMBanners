@@ -12,8 +12,7 @@ import android.widget.ListView;
 
 import com.allure.lbanners.LMBanners;
 import com.allure.lbanners.transformer.TransitionEffect;
-import com.allure.lbanners.utils.ScreenUtils;
-import com.allure.lmbanners.adapter.LocalImgAdapter;
+import com.allure.lmbanners.adapter.UrlImgAdapter;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -59,31 +58,49 @@ public class MainActivity extends AppCompatActivity {
 
         mLBanners = (LMBanners) findViewById(R.id.banners);
         //设置Banners高度
-        mLBanners.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(this, 200)));
+//      mLBanners.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(this, 200)));
+        mLBanners.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+
         //本地用法
-        mLBanners.setAdapter(new LocalImgAdapter(MainActivity.this),localImages);
+//        mLBanners.setAdapter(new LocalImgAdapter(MainActivity.this),localImages);
         //网络图片
-//        mLBanners.setAdapter(new UrlImgAdapter(MainActivity.this), networkImages);
+        mLBanners.setAdapter(new UrlImgAdapter(MainActivity.this), networkImages);
+
+
         //参数设置
+
+        mLBanners.isGuide(true);//是否为引导页
         mLBanners.setAutoPlay(true);//自动播放
         mLBanners.setVertical(false);//是否可以垂直
         mLBanners.setScrollDurtion(222);//两页切换时间
         mLBanners.setCanLoop(true);//循环播放
         mLBanners.setSelectIndicatorRes(R.drawable.page_indicator_select);//选中的原点
         mLBanners.setUnSelectUnIndicatorRes(R.drawable.page_indicator_unselect);//未选中的原点
-        mLBanners.setIndicatorWidth(5);//默认为5dp
+        //引导页默认距离底部50，banner默认距离底部20,若自定义原点到底部的距离,必须在setIndicatorWidth之前调用
+        mLBanners.setIndicatorBottomPadding(100);
+        mLBanners.setIndicatorWidth(5);//原点默认为5dp
 //        mLBanners.setHoriZontalTransitionEffect(TransitionEffect.Default);//选中喜欢的样式
         mLBanners.setHoriZontalCustomTransformer(new ParallaxTransformer(R.id.id_image));//自定义样式
-        mLBanners.setDurtion(2000);//切换时间
+        mLBanners.setDurtion(5000);//切换时间
         mLBanners.hideIndicatorLayout();//隐藏原点
         mLBanners.showIndicatorLayout();//显示原点
         mLBanners.setIndicatorPosition(LMBanners.IndicaTorPosition.BOTTOM_MID);//设置原点显示位置
 
+        mLBanners.setOnStartListener(new LMBanners.onStartListener() {
+            @Override
+            public void startOpen() {
+                //回调跳转的逻辑
+
+            }
+        });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0:
+                        addUrilImg2();
+                        mLBanners.setAdapter(new UrlImgAdapter(MainActivity.this), networkImages);
                         mLBanners.setHoriZontalTransitionEffect(TransitionEffect.Default);//Default
                         break;
                     case 1:
@@ -135,6 +152,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    private void addUrilImg2() {
+        networkImages.clear();
+        networkImages.add("http://h.hiphotos.baidu.com/image/h%3D300/sign=ff62800b073b5bb5a1d726fe06d2d523/a6efce1b9d16fdfa7807474eb08f8c5494ee7b23.jpg");
+        networkImages.add("http://g.hiphotos.baidu.com/image/h%3D300/sign=0a9ac84f89b1cb1321693a13ed5556da/1ad5ad6eddc451dabff9af4bb2fd5266d0163206.jpg");
+
+    }
+
 
     private void addUrilImg() {
 
