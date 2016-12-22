@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'//添加
 android {
     lintOptions {
         abortOnError false
@@ -27,11 +26,3 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
 }
 
-publish {
-    userOrg = 'allure0'//bintray.com用户名
-    groupId = 'com.allure0'//jcenter上的路径
-    artifactId = 'LMBanners'//项目名称
-    publishVersion = '1.0.6'//版本号
-    desc = 'Android Banners'//描述
-    website = 'https://github.com/Allure0/LMBanners'//网站，不重要,尽量模拟github上的地址
-}
