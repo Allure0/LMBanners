@@ -238,6 +238,11 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
         Log.d("LMBanners", "onPageScrolled was invoke()");
         int realPosition = position %= showCount;
         Log.e("真实position", realPosition + "");
+
+        if(!isGuide){
+            btnStart.setVisibility(View.GONE);
+            return;
+        }
         if (realPosition == getItemCount() - 2) {
             if (positionOffset > 0.5f) {
                 if (btnStart != null) {
@@ -395,7 +400,12 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
      */
     public void isGuide(boolean isGuide) {
         this.isGuide = isGuide;
-//        setGuide();
+        setGuide();
+
+    }
+
+    private void setGuide() {
+
     }
 
     /**
