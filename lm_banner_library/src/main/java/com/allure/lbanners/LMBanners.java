@@ -65,8 +65,6 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
     private int mSlectIndicatorRes = R.drawable.page_indicator_select;//选中指示器
     private int mUnSlectIndicatorRes = R.drawable.page_indicator_unselect;//未选中指示器
     private int mIndicatorWidth = 5;//默认指示器大小
-    public static  final int GUIDE_DEFAULT_PADDING = 50;
-    public  static  final int BANNER_DEFAULT_PADDING = 20;
 
 
     private int mTextColor = Color.WHITE;//文字颜色
@@ -162,17 +160,14 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
     }
 
     /**
-     * 设置引导页显示并且如果未设置indicatorBottomPadding:引导页默认距离底部为50dp,banners默认为20dp
+     * 设置引导页显示
      */
     private void setGuide() {
         if (isGuide) {
-            indicatorBottomPadding = GUIDE_DEFAULT_PADDING;
             btnStart.setVisibility(View.VISIBLE);
         } else {
-            indicatorBottomPadding = BANNER_DEFAULT_PADDING;
             btnStart.setVisibility(View.GONE);
         }
-        setIndicatorBottomPadding();
     }
 
     private void init() {
@@ -325,6 +320,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
     /**
      * Guide模式距离底部50，Banner模式距离底部20
      * 设置原点距离底部的距离
+     *
      * @param padding
      */
     public void setIndicatorBottomPadding(int padding) {

@@ -69,15 +69,15 @@ public class MainActivity extends AppCompatActivity {
 
         //参数设置
 
-        mLBanners.isGuide(true);//是否为引导页
+        mLBanners.isGuide(false);//是否为引导页
         mLBanners.setAutoPlay(true);//自动播放
         mLBanners.setVertical(false);//是否可以垂直
         mLBanners.setScrollDurtion(222);//两页切换时间
         mLBanners.setCanLoop(true);//循环播放
         mLBanners.setSelectIndicatorRes(R.drawable.page_indicator_select);//选中的原点
         mLBanners.setUnSelectUnIndicatorRes(R.drawable.page_indicator_unselect);//未选中的原点
-        //引导页默认距离底部50，banner默认距离底部20,若自定义原点到底部的距离,必须在setIndicatorWidth之前调用
-        mLBanners.setIndicatorBottomPadding(100);
+        //若自定义原点到底部的距离,默认20,必须在setIndicatorWidth之前调用
+        mLBanners.setIndicatorBottomPadding(30);
         mLBanners.setIndicatorWidth(5);//原点默认为5dp
 //        mLBanners.setHoriZontalTransitionEffect(TransitionEffect.Default);//选中喜欢的样式
         mLBanners.setHoriZontalCustomTransformer(new ParallaxTransformer(R.id.id_image));//自定义样式

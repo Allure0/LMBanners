@@ -27,7 +27,8 @@
             app:horizontal_transitionEffect="accordion"
             app:indicator_position="bottom_mid"
             app:indicator_width="5"
-            app:indicatorBottomPadding="20"
+            app:isGuide="true"
+            app:indicatorBottomPadding="100"
 
             >
 
