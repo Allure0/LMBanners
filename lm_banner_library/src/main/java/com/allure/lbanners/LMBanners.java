@@ -26,6 +26,7 @@ import com.allure.lbanners.utils.ScreenUtils;
 import com.allure.lbanners.utils.ViewPagerScroller;
 import com.allure.lbanners.viewpager.HorizonVerticalViewPager;
 import com.allure.lbanners.viewpager.MyViewPager;
+import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +132,6 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
         this.btnStart = (Button) view.findViewById(R.id.btn_start);
         pageItemWidth = ScreenUtils.dip2px(context, mIndicatorWidth);
         this.viewPager.addOnPageChangeListener(this);
-        setGuide();
         setIndicatorBottomPadding();
         //如果是纵向滑动重新进行初始化
         checkIsVertical(isVertical);
@@ -159,16 +159,6 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
         });
     }
 
-    /**
-     * 设置引导页显示
-     */
-    private void setGuide() {
-        if (isGuide) {
-            btnStart.setVisibility(View.VISIBLE);
-        } else {
-            btnStart.setVisibility(View.GONE);
-        }
-    }
 
     private void init() {
         viewPager.setAdapter(null);
@@ -178,6 +168,9 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
             return;
         }
         showCount = mList.size();
+        if (showCount == mList.size()) {
+
+        }
         if (showCount == 1) {
             viewPager.setScrollEnabled(false);
         } else {
@@ -198,6 +191,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
                 view.setLayoutParams(params);
                 view.setBackgroundResource(mUnSlectIndicatorRes);
             }
+
             indicatorLayout.addView(view);
         }
 
@@ -242,6 +236,28 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         Log.d("LMBanners", "onPageScrolled was invoke()");
+        int realPosition = position %= showCount;
+        Log.e("真实position", realPosition + "");
+        if (realPosition == getItemCount() - 2) {
+            if (positionOffset > 0.5f) {
+                if (btnStart != null) {
+                    ViewHelper.setAlpha(btnStart, positionOffset);
+                    btnStart.setVisibility(View.VISIBLE);
+                }
+            } else {
+                btnStart.setVisibility(View.GONE);
+            }
+        } else if (realPosition == getItemCount() - 1) {
+            if (positionOffset < 0.5f) {
+                btnStart.setVisibility(View.VISIBLE);
+                ViewHelper.setAlpha(btnStart, 1.0f - positionOffset);
+            } else {
+                btnStart.setVisibility(View.GONE);
+            }
+        } else {
+            btnStart.setVisibility(View.GONE);
+        }
+
 
     }
 
@@ -273,6 +289,11 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
     public void onPageScrollStateChanged(int state) {
         Log.d("LMBanners", "onPageScrollStateChanged was invoke()");
 
+    }
+
+
+    public int getItemCount() {
+        return mList == null ? 0 : mList.size();
     }
 
     /**
@@ -374,7 +395,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
      */
     public void isGuide(boolean isGuide) {
         this.isGuide = isGuide;
-        setGuide();
+//        setGuide();
     }
 
     /**

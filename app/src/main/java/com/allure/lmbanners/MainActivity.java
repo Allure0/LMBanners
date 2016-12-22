@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.allure.lbanners.LMBanners;
 import com.allure.lbanners.transformer.TransitionEffect;
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         //参数设置
 
-        mLBanners.isGuide(false);//是否为引导页
+        mLBanners.isGuide(true);//是否为引导页
         mLBanners.setAutoPlay(true);//自动播放
         mLBanners.setVertical(false);//是否可以垂直
         mLBanners.setScrollDurtion(222);//两页切换时间
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void startOpen() {
                 //回调跳转的逻辑
+                Toast.makeText(MainActivity.this,"我要进入主界面",1).show();
 
             }
         });
