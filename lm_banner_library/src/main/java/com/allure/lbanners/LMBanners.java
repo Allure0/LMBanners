@@ -237,8 +237,6 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         Log.d("LMBanners", "onPageScrolled was invoke()");
         int realPosition = position %= showCount;
-        Log.e("真实position", realPosition + "");
-
         if(!isGuide){
             btnStart.setVisibility(View.GONE);
             return;
