@@ -5,25 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-   >
-
-
-
+    android:orientation="vertical">
 
 
     <com.allure.lbanners.LMBanners
         android:id="@+id/banners"
-        app:isGuide="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"></com.allure.lbanners.LMBanners>
+        android:background="@android:color/transparent"
+        app:auto_play="true"
+        app:canLoop="true"
+        app:durtion="5000"
+        app:horizontal_transitionEffect="accordion"
+        app:indicatorBottomPadding="100"
+        app:indicator_position="bottom_mid"
+        app:indicator_select="@drawable/page_indicator_select"
+        app:indicator_unselect="@drawable/page_indicator_unselect"
+        app:indicator_width="5"
+        app:isGuide="true"
+        app:isVertical="false"
+        app:scroll_duration="1000"
+
+        >
+
+    </com.allure.lbanners.LMBanners>
+
 
     <ListView
-        android:visibility="gone"
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
     </ListView>
 
