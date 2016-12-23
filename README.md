@@ -52,7 +52,7 @@ ViewPager即可向左滑动.但是当向右的时候呢?原理一样,当下标�
 Gradle:  
 ``` xml
 dependencies {
-  compile 'com.allure0:LMBanners:1.0.7'
+  compile 'com.allure0:LMBanners:1.0.8'
 }
 ```
 
