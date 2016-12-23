@@ -356,7 +356,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
 
 
     private void setIndicatorBottomPadding() {
-        indicatorLayout.setPadding(0, 0, 0, pageItemWidth = ScreenUtils.dip2px(context, indicatorBottomPadding));
+        indicatorLayout.setPadding(0, 0, 0,  ScreenUtils.dip2px(context, indicatorBottomPadding));
     }
 
     /**

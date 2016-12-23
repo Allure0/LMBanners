@@ -12,27 +12,12 @@
 
 
 
-        <com.allure.lbanners.LMBanners
-            android:background="@android:color/transparent"
-            android:id="@+id/banners"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:canLoop="true"
-            app:isVertical="false"
-            app:auto_play="true"
-            app:durtion="5000"
-            app:scroll_duration="1000"
-            app:indicator_select="@drawable/page_indicator_select"
-            app:indicator_unselect="@drawable/page_indicator_unselect"
-            app:horizontal_transitionEffect="accordion"
-            app:indicator_position="bottom_mid"
-            app:indicator_width="5"
-            app:isGuide="true"
-            app:indicatorBottomPadding="100"
-
-            >
-
-        </com.allure.lbanners.LMBanners>
+    <com.allure.lbanners.LMBanners
+        android:id="@+id/banners"
+        app:isGuide="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"></com.allure.lbanners.LMBanners>
 
     <ListView
         android:visibility="gone"

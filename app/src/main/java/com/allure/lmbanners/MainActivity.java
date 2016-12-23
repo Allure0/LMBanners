@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.allure.lbanners.LMBanners;
 import com.allure.lbanners.transformer.TransitionEffect;
+import com.allure.lmbanners.adapter.LocalImgAdapter;
 import com.allure.lmbanners.adapter.UrlImgAdapter;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -63,29 +64,29 @@ public class MainActivity extends AppCompatActivity {
         mLBanners.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
 
         //本地用法
-//        mLBanners.setAdapter(new LocalImgAdapter(MainActivity.this),localImages);
+        mLBanners.setAdapter(new LocalImgAdapter(MainActivity.this),localImages);
         //网络图片
-        mLBanners.setAdapter(new UrlImgAdapter(MainActivity.this), networkImages);
+//        mLBanners.setAdapter(new UrlImgAdapter(MainActivity.this), networkImages);
 
 
         //参数设置
-
-        mLBanners.isGuide(true);//是否为引导页
-        mLBanners.setAutoPlay(true);//自动播放
-        mLBanners.setVertical(false);//是否可以垂直
-        mLBanners.setScrollDurtion(222);//两页切换时间
-        mLBanners.setCanLoop(true);//循环播放
-        mLBanners.setSelectIndicatorRes(R.drawable.page_indicator_select);//选中的原点
-        mLBanners.setUnSelectUnIndicatorRes(R.drawable.page_indicator_unselect);//未选中的原点
-        //若自定义原点到底部的距离,默认20,必须在setIndicatorWidth之前调用
-        mLBanners.setIndicatorBottomPadding(30);
-        mLBanners.setIndicatorWidth(5);//原点默认为5dp
-//        mLBanners.setHoriZontalTransitionEffect(TransitionEffect.Default);//选中喜欢的样式
+//
+//        mLBanners.isGuide(true);//是否为引导页
+//        mLBanners.setAutoPlay(true);//自动播放
+//        mLBanners.setVertical(false);//是否可以垂直
+//        mLBanners.setScrollDurtion(222);//两页切换时间
+//        mLBanners.setCanLoop(true);//循环播放
+//        mLBanners.setSelectIndicatorRes(R.drawable.page_indicator_select);//选中的原点
+//        mLBanners.setUnSelectUnIndicatorRes(R.drawable.page_indicator_unselect);//未选中的原点
+//        //若自定义原点到底部的距离,默认20,必须在setIndicatorWidth之前调用
+//        mLBanners.setIndicatorBottomPadding(30);
+//        mLBanners.setIndicatorWidth(5);//原点默认为5dp
+////        mLBanners.setHoriZontalTransitionEffect(TransitionEffect.Default);//选中喜欢的样式
         mLBanners.setHoriZontalCustomTransformer(new ParallaxTransformer(R.id.id_image));//自定义样式
-        mLBanners.setDurtion(5000);//切换时间
-        mLBanners.hideIndicatorLayout();//隐藏原点
-        mLBanners.showIndicatorLayout();//显示原点
-        mLBanners.setIndicatorPosition(LMBanners.IndicaTorPosition.BOTTOM_MID);//设置原点显示位置
+//        mLBanners.setDurtion(5000);//切换时间
+//        mLBanners.hideIndicatorLayout();//隐藏原点
+//        mLBanners.showIndicatorLayout();//显示原点
+//        mLBanners.setIndicatorPosition(LMBanners.IndicaTorPosition.BOTTOM_MID);//设置原点显示位置
 
         mLBanners.setOnStartListener(new LMBanners.onStartListener() {
             @Override
