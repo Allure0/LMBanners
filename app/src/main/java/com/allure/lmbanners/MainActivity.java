@@ -3,7 +3,6 @@ package com.allure.lmbanners;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,8 +12,8 @@ import android.widget.Toast;
 
 import com.allure.lbanners.LMBanners;
 import com.allure.lbanners.transformer.TransitionEffect;
+import com.allure.lbanners.utils.ScreenUtils;
 import com.allure.lmbanners.adapter.LocalImgAdapter;
-import com.allure.lmbanners.adapter.UrlImgAdapter;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private LayoutInflater mInflater;
     private LMBanners mLBanners;
     //本地图片
     private ArrayList<Integer> localImages = new ArrayList<Integer>();
@@ -49,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initImageLoader();
-        mInflater = this.getLayoutInflater();
-
         addLocalImg();
         addUrilImg();
 
@@ -60,39 +56,38 @@ public class MainActivity extends AppCompatActivity {
 
         mLBanners = (LMBanners) findViewById(R.id.banners);
         //设置Banners高度
-//      mLBanners.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(this, 200)));
-        mLBanners.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-
-        //本地用法
-        mLBanners.setAdapter(new LocalImgAdapter(MainActivity.this),localImages);
-        //网络图片
-//        mLBanners.setAdapter(new UrlImgAdapter(MainActivity.this), networkImages);
+      mLBanners.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(this, 200)));
 
 
         //参数设置
-//
-//        mLBanners.isGuide(true);//是否为引导页
-//        mLBanners.setAutoPlay(true);//自动播放
-//        mLBanners.setVertical(false);//是否可以垂直
-//        mLBanners.setScrollDurtion(222);//两页切换时间
-//        mLBanners.setCanLoop(true);//循环播放
-//        mLBanners.setSelectIndicatorRes(R.drawable.page_indicator_select);//选中的原点
-//        mLBanners.setUnSelectUnIndicatorRes(R.drawable.page_indicator_unselect);//未选中的原点
-//        //若自定义原点到底部的距离,默认20,必须在setIndicatorWidth之前调用
-//        mLBanners.setIndicatorBottomPadding(30);
-//        mLBanners.setIndicatorWidth(5);//原点默认为5dp
-////        mLBanners.setHoriZontalTransitionEffect(TransitionEffect.Default);//选中喜欢的样式
-        mLBanners.setHoriZontalCustomTransformer(new ParallaxTransformer(R.id.id_image));//自定义样式
-//        mLBanners.setDurtion(5000);//切换时间
+        mLBanners.isGuide(false);//是否为引导页
+        mLBanners.setAutoPlay(true);//自动播放
+        mLBanners.setVertical(false);//是否锤子播放
+        mLBanners.setScrollDurtion(2000);//两页切换时间
+        mLBanners.setCanLoop(true);//循环播放
+        mLBanners.setSelectIndicatorRes(R.drawable.guide_indicator_select);//选中的原点
+        mLBanners.setUnSelectUnIndicatorRes(R.drawable.guide_indicator_unselect);//未选中的原点
+        //若自定义原点到底部的距离,默认20,必须在setIndicatorWidth之前调用
+        mLBanners.setIndicatorBottomPadding(30);
+        mLBanners.setIndicatorWidth(10);//原点默认为5dp
+        mLBanners.setHoriZontalTransitionEffect(TransitionEffect.ZoomStack);//选中喜欢的样式
+//        mLBanners.setHoriZontalCustomTransformer(new ParallaxTransformer(R.id.id_image));//自定义样式
+        mLBanners.setDurtion(3000);//轮播切换时间
 //        mLBanners.hideIndicatorLayout();//隐藏原点
 //        mLBanners.showIndicatorLayout();//显示原点
-//        mLBanners.setIndicatorPosition(LMBanners.IndicaTorPosition.BOTTOM_MID);//设置原点显示位置
+        mLBanners.setIndicatorPosition(LMBanners.IndicaTorPosition.BOTTOM_MID);//设置原点显示位置
+
+
+        //本地用法
+        mLBanners.setAdapter(new LocalImgAdapter(MainActivity.this), localImages);
+        //网络图片
+//        mLBanners.setAdapter(new UrlImgAdapter(MainActivity.this), networkImages);
 
         mLBanners.setOnStartListener(new LMBanners.onStartListener() {
             @Override
             public void startOpen() {
                 //回调跳转的逻辑
-                Toast.makeText(MainActivity.this,"我要进入主界面",1).show();
+                Toast.makeText(MainActivity.this, "我要进入主界面", 1).show();
 
             }
         });
@@ -102,8 +97,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        addUrilImg2();
-                        mLBanners.setAdapter(new UrlImgAdapter(MainActivity.this), networkImages);
                         mLBanners.setHoriZontalTransitionEffect(TransitionEffect.Default);//Default
                         break;
                     case 1:
@@ -156,21 +149,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void addUrilImg2() {
-        networkImages.clear();
-        networkImages.add("http://h.hiphotos.baidu.com/image/h%3D300/sign=ff62800b073b5bb5a1d726fe06d2d523/a6efce1b9d16fdfa7807474eb08f8c5494ee7b23.jpg");
-        networkImages.add("http://g.hiphotos.baidu.com/image/h%3D300/sign=0a9ac84f89b1cb1321693a13ed5556da/1ad5ad6eddc451dabff9af4bb2fd5266d0163206.jpg");
-
-    }
-
 
     private void addUrilImg() {
-
         networkImages.add("http://h.hiphotos.baidu.com/image/h%3D300/sign=ff62800b073b5bb5a1d726fe06d2d523/a6efce1b9d16fdfa7807474eb08f8c5494ee7b23.jpg");
         networkImages.add("http://g.hiphotos.baidu.com/image/h%3D300/sign=0a9ac84f89b1cb1321693a13ed5556da/1ad5ad6eddc451dabff9af4bb2fd5266d0163206.jpg");
         networkImages.add("http://a.hiphotos.baidu.com/image/h%3D300/sign=61660ec2207f9e2f6f351b082f31e962/500fd9f9d72a6059e5c05d3e2f34349b023bbac6.jpg");
         networkImages.add("http://c.hiphotos.baidu.com/image/h%3D300/sign=f840688728738bd4db21b431918a876c/f7246b600c338744c90c3826570fd9f9d62aa09a.jpg");
+    }
 
+    private void addLocalImg() {
+        localImages.add(R.mipmap.img1);
+        localImages.add(R.mipmap.img2);
+        localImages.add(R.mipmap.img3);
+        localImages.add(R.mipmap.img4);
+        localImages.add(R.mipmap.img5);
     }
 
     private void initImageLoader() {
@@ -186,13 +178,7 @@ public class MainActivity extends AppCompatActivity {
         ImageLoader.getInstance().init(config);
     }
 
-    private void addLocalImg() {
-        localImages.add(R.mipmap.img1);
-        localImages.add(R.mipmap.img2);
-        localImages.add(R.mipmap.img3);
-        localImages.add(R.mipmap.img4);
-        localImages.add(R.mipmap.img5);
-    }
+
 
     @Override
     protected void onPause() {

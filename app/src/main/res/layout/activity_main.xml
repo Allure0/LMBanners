@@ -21,7 +21,6 @@
         app:indicator_position="bottom_mid"
         app:indicator_select="@drawable/page_indicator_select"
         app:indicator_unselect="@drawable/page_indicator_unselect"
-        app:indicator_width="5"
         app:isGuide="true"
         app:isVertical="false"
         app:scroll_duration="1000"
@@ -35,7 +34,7 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+       >
 
     </ListView>
 
