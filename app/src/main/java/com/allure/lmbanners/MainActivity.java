@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         //网络图片
 //        mLBanners.setAdapter(new UrlImgAdapter(MainActivity.this), networkImages);
 
-        mLBanners.setOnStartListener(new LMBanners.onStartListener() {
+        mLBanners.setOnStartListener(0XFFAABBCC, 0XFFAACCBB, new LMBanners.onStartListener() {
             @Override
             public void startOpen() {
                 //回调跳转的逻辑

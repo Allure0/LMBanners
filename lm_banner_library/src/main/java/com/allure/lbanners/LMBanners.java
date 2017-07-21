@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextClock;
 
 import com.allure.lbanners.adapter.LBaseAdapter;
 import com.allure.lbanners.transformer.LMPageTransformer;
@@ -69,7 +71,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
 
 
     private int mTextColor = Color.WHITE;//文字颜色
-    private int mTipTextSize;//文字大小
+    private int mBtnBgColor;
 
 
     private Button btnStart;//开启按钮
@@ -79,8 +81,18 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
         return onStartListener;
     }
 
-    public void setOnStartListener(LMBanners.onStartListener onStartListener) {
+    /**
+     * 若btnBgColor为-1，则表示不需要任何背景色
+     * @param btnBgColor
+     * @param textColor
+     * @param onStartListener
+     */
+    public void setOnStartListener(@NonNull int btnBgColor, int textColor, LMBanners.onStartListener onStartListener) {
         this.onStartListener = onStartListener;
+        this.mTextColor=textColor;
+        if(-1!=btnBgColor){
+            this.mBtnBgColor=btnBgColor;
+        }
     }
 
     public LMBanners(Context context) {
@@ -130,6 +142,7 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
         this.viewPager = (HorizonVerticalViewPager) view.findViewById(R.id.gallery);
         this.indicatorLayout = (LinearLayout) view.findViewById(R.id.indicatorLayout);
         this.btnStart = (Button) view.findViewById(R.id.btn_start);
+
         pageItemWidth = ScreenUtils.dip2px(context, mIndicatorWidth);
         this.viewPager.addOnPageChangeListener(this);
         setIndicatorBottomPadding();
@@ -241,6 +254,8 @@ public class LMBanners<T> extends FrameLayout implements ViewPager.OnPageChangeL
             btnStart.setVisibility(View.GONE);
             return;
         }
+        btnStart.setBackgroundResource(mBtnBgColor);
+        btnStart.setTextColor(mTextColor);
         if (realPosition == getItemCount() - 2) {
             if (positionOffset > 0.5f) {
                 if (btnStart != null) {

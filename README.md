@@ -1,15 +1,10 @@
 
 ---
-#LBanners
+# LMBanners
 -------------
 
-> 关于我，欢迎关注  
-      QQ群:[482906631]()
 
-
-最近在朋友[bingoogolapple](https://github.com/bingoogolapple)群里看依然有童鞋需求Banners的库。
-有的又需要引导页，为帮助更多的童鞋更好更快的快速完成项目开发而开源此库
-####Banners示例:  
+#### Banners示例:  
 ![image](https://github.com/Allure0/LMBanners/blob/master/app/LMBanners.gif)
 
 ####引导页示例：
@@ -29,7 +24,7 @@
 - 支持设置原点距离底部的距离
 
 
-###原理说明
+### 原理说明
 项目基于ViewPager实现,ViewPager使用方式不用多说。
 
 需求1：如何循环播放？
@@ -56,7 +51,7 @@ dependencies {
 }
 ```
 
-###使用方法
+### 使用方法
 Config in xml:
 ``` xml
  <com.allure.lbanners.LMBanners
@@ -146,7 +141,7 @@ Config in Java:
 -  使用纵向播放后代码不要设置setHoriZontalTransitionEffect（）、setHoriZontalCustomTransformer（）, XML内不要调用自定义属性horizontal_transitionEffect
  XML内不要调用自定义属性horizontal_transitionEffect
 -  若setIndicatorBottomPadding（）动态代码自定义了原点距离底部的距离，需要在setIndicatorWidth()之前调用
-###TODO
+### TODO
  XML内不要调用自定义属性horizontal_transitionEffect
 若有BUG或者疑问,请提交Issues。者QQ群:[482906631]()
 

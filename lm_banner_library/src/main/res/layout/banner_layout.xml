@@ -24,11 +24,10 @@
     <Button
         android:id="@+id/btn_start"
         android:layout_width="104dp"
-        android:layout_height="29dp"
+        android:layout_height="wrap_content"
         android:layout_above="@id/indicatorLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/banners_btn_shape"
         android:gravity="center"
         android:text="立即开启"
         android:textColor="#f24814"

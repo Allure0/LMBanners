@@ -1,9 +1,11 @@
 package com.allure.lmbanners;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -25,7 +27,7 @@ import java.util.List;
  */
 
 public class GuideActivity extends AppCompatActivity {
-    private LMBanners mLBanners;
+    private LMBanners lmBanners;
     //本地图片
     private ArrayList<Integer> localImages = new ArrayList<Integer>();
     //网络图片
@@ -77,27 +79,33 @@ public class GuideActivity extends AppCompatActivity {
         ImageLoader.getInstance().init(config);
     }
     private void initGuide() {
-        mLBanners = (LMBanners) findViewById(R.id.banners);
-        mLBanners.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-        mLBanners.isGuide(true);
-//        mLBanners.setVertical(true);
-        mLBanners.setAutoPlay(false);
-        mLBanners.setCanLoop(false);
-        mLBanners.setScrollDurtion(1200);
-        mLBanners.setIndicatorBottomPadding(30);
-        mLBanners.setIndicatorWidth(10);
-//        mLBanners.setHoriZontalTransitionEffect(TransitionEffect.Default);
-        mLBanners.setHoriZontalCustomTransformer(new ParallaxTransformer(R.id.id_image));
-        mLBanners.setIndicatorPosition(LMBanners.IndicaTorPosition.BOTTOM_MID);
+        lmBanners = (LMBanners) findViewById(R.id.banners);
+        lmBanners.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        lmBanners.isGuide(true);
+//        lmBanners.setVertical(true);
+        lmBanners.setAutoPlay(false);
+        lmBanners.setCanLoop(false);
+        lmBanners.setScrollDurtion(1200);
+        lmBanners.setIndicatorBottomPadding(30);
+        lmBanners.setIndicatorWidth(10);
+//      lmBanners.setHoriZontalTransitionEffect(TransitionEffect.Default);
+        lmBanners.setHoriZontalCustomTransformer(new ParallaxTransformer(R.id.id_image));
+        lmBanners.setIndicatorPosition(LMBanners.IndicaTorPosition.BOTTOM_MID);
         //本地用法
-        mLBanners.setAdapter(new LocalImgAdapter(GuideActivity.this), localImages);
-        mLBanners.setOnStartListener(new LMBanners.onStartListener() {
+        lmBanners.setAdapter(new LocalImgAdapter(GuideActivity.this), localImages);
+
+        /**
+         * 若btnBgColor为-1，则表示不需要任何背景色
+         * textColor 文字颜色
+         * 点击事件
+         */
+//        lmBanners.setOnStartListener(-1,getResources().getColor(R.color.colorAccent),****);
+        lmBanners.setOnStartListener(R.drawable.button_shape,0XFFAACCBB,new LMBanners.onStartListener() {
             @Override
             public void startOpen() {
                 //回调跳转的逻辑
                 startActivity(new Intent(GuideActivity.this,MainActivity.class));
                 Toast.makeText(GuideActivity.this, "进入Banners", 1).show();
-
             }
         });
     }
@@ -106,19 +114,19 @@ public class GuideActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mLBanners.stopImageTimerTask();
+        lmBanners.stopImageTimerTask();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mLBanners.startImageTimerTask();
+        lmBanners.startImageTimerTask();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mLBanners.clearImageTimerTask();
+        lmBanners.clearImageTimerTask();
     }
 
 
